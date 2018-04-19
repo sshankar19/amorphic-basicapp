@@ -1,0 +1,17 @@
+{
+    "createControllerFor": "yes",
+	"ver":          "0",
+	"authentication": {
+		"validateEmail": false,
+		"defaultEmail": "admin@havenlife.com",
+		"defaultAdminRole": "sadmin",
+		"maxLoginAttempts": 3,
+		"maxLoginAttemptsPeriodHours": 6,
+		"temporaryPasswordExpiresHours": 24,
+		"temporaryPasswordExpiresMinutes": 1440,
+		"passwordExpiresMinutes": 129600,
+		"passwordExpiresDays": 90,
+		"maxPreviousPasswords": 3,
+		"maxLoginPeriodMinutes": 10
+	}
+}
