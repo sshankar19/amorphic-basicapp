@@ -1,11 +1,11 @@
 {
     "templateMode": "typescript",
-    "conflictMode": "soft",
     "sourceMode": "webpack",
     "port": 9005,
-    "sessionSeconds" : 3600,
-    "objectCacheSeconds" : 600,
+    "sessionSeconds" : 120,
+    "objectCacheSeconds" : 30,
     "sessionSecret" : "Ey0veeljPcLsHitdxCG2",
 	"applications" : {"ticket": "apps/ticket"},
-	"application"  : "ticket"
+	"application"  : "ticket",
+    "createControllerFor": "yes"
 }

@@ -1,3 +1,35 @@
 {
-
+    "PersistableCustomer": {
+        "documentOf": "customer_1",
+        "table": "customer_1",
+        "parents": {
+            "sale": {
+                "id": "sale_id",
+                "fetch": true
+            }
+        },
+        "cascadeSave": true
+    },
+    "PersistableSale": {
+        "documentOf": "sale_1",
+        "table": "sale_1",
+        "children": {
+            "items": {
+                "id": "sale_id",
+                "fetch": false
+            }
+        },
+        "cascadeSave": false
+    },
+    "Item": {
+        "documentOf": "item_1",
+        "table": "item_1",
+        "parents": {
+            "sale": {
+                "id": "sale_id",
+                "fetch": false
+            }
+        },
+        "cascadeSave": false
+    }
 }

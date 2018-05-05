@@ -1,21 +1,21 @@
-import {Supertype, supertypeClass, property, remote, amorphicStatic} from 'amorphic';
-amorphicStatic['toClientRuleSet'] = ['ticket']
-import {Customer} from "../../../common/js/Customer";
+import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable, Bindable, Persistable} from 'amorphic';
+amorphicStatic['toClientRuleSet'] = ['ticket'];
+amorphicStatic['toServerRuleSet'] = ['ticket']
+
+import { BasicClientServerChangesController } from './BasicClientServerChangesController';
+import { UnableToApplyChangesController } from './UnableToApplyChangesController'
+import {PersistableCustomer} from "../../../common/js/PersistableCustomer";
 
 declare var AmorphicRouter : any;
 declare var ticketRoutes : any;
 
 @supertypeClass
-export class Controller  {
+export class Controller extends Bindable(Remoteable(Persistable(Supertype)))  {
 
      // Global properties
 
     serverInit () {
         return amorphicStatic.syncAllTables();
-    }
-
-    preServerCall (changeCount) {
-        console.log("preServerCall objects changed: " + changeCount );
     }
 
     @property()
@@ -26,9 +26,13 @@ export class Controller  {
     route: any;
 
     @property()
-    customer: Customer
+    basicClientServerChangesController : BasicClientServerChangesController;
 
+    @property()
+    unableToApplyChangesController : UnableToApplyChangesController;
 
+    @property()
+    customer: PersistableCustomer;
 
     @remote()
     publicInitAll ()
@@ -36,12 +40,20 @@ export class Controller  {
     };
 
 
+    preServerCall(hasChanges: any, _changes: any, _context: any, forceUpdate: any) {
+        if (this.unableToApplyChangesController) {
+            return this.unableToApplyChangesController.refreshCustomer(forceUpdate);
+        }
+
+    }
 
     clientInit ()
     {
-
         this.router = AmorphicRouter;
         this.route = AmorphicRouter.route(this, ticketRoutes);
+
+        this.basicClientServerChangesController = new BasicClientServerChangesController();
+        this.unableToApplyChangesController = new UnableToApplyChangesController();
     }
 
 
@@ -53,17 +65,6 @@ export class Controller  {
     };
 
 
-    onClickClient() {
-        console.log('on client');
-        this.onClickServer();
-    }
 
-    @remote()
-    onClickServer() {
-        this.customer = new Customer();
-        this.customer.name = 'ravi client';
-        this.customer.onlyServer = 'server-side initialized'
-        console.log(this.customer.name);
-    }
 }
 
