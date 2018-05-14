@@ -13,6 +13,9 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
     @property()
     customer: PersistableCustomer;
 
+    @property()
+    directProperty: number = 1;
+
     @property({ toClient: false })
     txn: any;
 
@@ -71,14 +74,21 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
     }
 
     @remote()
+    getFromPersistWithQuery() {
+        return PersistableCustomer.getFromPersistWithQuery({name: 'ravi client'});
+    }
+
+    @remote()
     async loadCustomerSaleUsingFetch() {
-        if (!this.customer) {
-            let customers = await PersistableCustomer.persistorFetchByQuery({name: 'ravi client'}, {session: this.amorphic});
-            this.customer  = customers[0];
-        }
+        let customers = await PersistableCustomer.persistorFetchByQuery({name: 'ravi client'}, {session: this.amorphic});
+        this.customer  = customers[0];
+        //customers[0].sessionData = this.amorphic.currentSession;
+
+        let test = this.amorphic as any;
+        customers[0].sessionData = test.currentSession;
 
         await this.customer.sale.fetch({items: true});
-
+        this.directProperty +=1;
         console.log(this.customer.name);
     }
 
@@ -89,7 +99,6 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
         };
 
         this.customer.cascadeSave(this.txn);
-
         return this.amorphic.end(this.txn)
             .finally(() => {
                 this.txn = null;

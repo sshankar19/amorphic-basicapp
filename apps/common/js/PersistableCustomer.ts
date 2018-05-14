@@ -15,6 +15,12 @@ export class PersistableCustomer extends Remoteable(Persistable(Supertype)) {
     @property({})
     sale: PersistableSale;
 
+    @property()
+    changeTest: string;
+
+    @property()
+    sessionData: string;
+
     constructor() {
         super();
     }
