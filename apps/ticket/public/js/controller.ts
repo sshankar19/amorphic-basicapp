@@ -15,6 +15,9 @@ export class Controller extends Bindable(Remoteable(Persistable(Supertype)))  {
      // Global properties
 
     serverInit () {
+        if (!this.unableToApplyChangesController) {
+            this.unableToApplyChangesController = new UnableToApplyChangesController(this);
+        }
         return amorphicStatic.syncAllTables();
     }
 
@@ -52,8 +55,14 @@ export class Controller extends Bindable(Remoteable(Persistable(Supertype)))  {
         this.router = AmorphicRouter;
         this.route = AmorphicRouter.route(this, ticketRoutes);
 
-        this.basicClientServerChangesController = new BasicClientServerChangesController();
-        this.unableToApplyChangesController = new UnableToApplyChangesController();
+        if (!this.basicClientServerChangesController) {
+            this.basicClientServerChangesController = new BasicClientServerChangesController();
+        }
+
+        if (!this.unableToApplyChangesController ) {
+            this.unableToApplyChangesController = new UnableToApplyChangesController(this);
+        }
+
     }
 
 

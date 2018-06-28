@@ -1,10 +1,16 @@
 {
     "templateMode": "typescript",
     "sourceMode": "webpack",
-    "port": 9005,
+    "port": 9006,
     "sessionSeconds" : 300,
-    "objectCacheSeconds" : 120,
+    "objectCacheSeconds" : 10,
     "sessionSecret" : "Ey0veeljPcLsHitdxCG2",
 	"applications" : {"ticket": "apps/ticket"},
-	"application"  : "ticket"
+	"application"  : "ticket",
+    "dbdriver": "knex",
+    "dbtype": "pg",
+    "dbpath": "localhost",
+    "dbname": "dev",
+    "dbuser": "nodejs",
+    "dbpassword": "nodejs"
 }

@@ -2,12 +2,14 @@ import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable,
 import {PersistableCustomer} from "../../../common/js/PersistableCustomer";
 import * as Bluebird from 'bluebird';
 import {PersistableSale, Item} from "../../../common/js/PersistableSale";
+import { Controller } from "./controller";
 
 @supertypeClass({toClient: true, toServer: true})
 export class UnableToApplyChangesController extends Bindable(Remoteable(Persistable(Supertype)))  {
 
-    constructor() {
+    constructor(controller: Controller) {
         super();
+        this.controller = controller;
     }
 
     @property()
@@ -18,6 +20,14 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
 
     @property({ toClient: false })
     txn: any;
+
+    @property({getType: () => Controller})
+    controller: Controller;
+
+
+    serverInit () {
+        console.log('serverInit ... UnableToApplyChangesController');
+    }
 
     initialCreate() {
         console.log('on client');
@@ -82,11 +92,11 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
     async loadCustomerSaleUsingFetch() {
         let customers = await PersistableCustomer.persistorFetchByQuery({name: 'ravi client'}, {session: this.amorphic});
         this.customer  = customers[0];
+        this.controller.customer = this.customer;
         //customers[0].sessionData = this.amorphic.currentSession;
-
+        
         let test = this.amorphic as any;
         customers[0].sessionData = test.currentSession;
-
         await this.customer.sale.fetch({items: true});
         this.directProperty +=1;
         console.log(this.customer.name);
