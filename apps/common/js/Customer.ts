@@ -1,4 +1,4 @@
-import {Supertype, supertypeClass, property, remote, Remoteable, amorphicStatic} from 'amorphic';
+import {Supertype, supertypeClass, property, remote, Remoteable, amorphicStatic} from '@havenlife/amorphic';
 
 @supertypeClass({toClient: true, toServer: true})
 export class Customer extends Remoteable(Supertype) {

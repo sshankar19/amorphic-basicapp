@@ -1,4 +1,4 @@
-import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable, Bindable, Persistable} from 'amorphic';
+import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable, Bindable, Persistable} from '@havenlife/amorphic';
 import {PersistableCustomer} from "../../../common/js/PersistableCustomer";
 import * as Bluebird from 'bluebird';
 import {PersistableSale, Item} from "../../../common/js/PersistableSale";

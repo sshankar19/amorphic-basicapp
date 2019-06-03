@@ -1,4 +1,4 @@
-import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable} from 'amorphic';
+import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable} from '@havenlife/amorphic';
 import {Customer} from "../../../common/js/Customer";
 
 @supertypeClass({toClient: true, toServer: true})

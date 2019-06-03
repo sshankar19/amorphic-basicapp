@@ -31,7 +31,7 @@ module.exports = {
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
         alias: {
-            amorphic: path.resolve(__dirname, './node_modules/semotus/index.js')
+            '@havenlife/amorphic': path.resolve(__dirname, './node_modules/@havenlife/semotus/index.js')
         }
     },
     devtool: 'inline-source-map'
