@@ -1,6 +1,13 @@
 var path = require('path');
 var nodeExternals = require('webpack-node-externals');
 module.exports = {
+    node: {
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
+        mssql: 'empty',
+        module: 'empty'
+      },    
     entry: './apps/ticket/public/js/index.ts',
     output: {
         filename: './bundle.js',

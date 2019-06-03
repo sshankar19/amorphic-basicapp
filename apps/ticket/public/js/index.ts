@@ -1,5 +1,5 @@
 import {Controller} from './controller';
-import * as RemoteObjectTemplate from 'semotus';
+import * as RemoteObjectTemplate from '@havenlife/semotus';
 import * as Q from 'q';
 import * as Bluebird from 'bluebird';
 

@@ -1,4 +1,4 @@
-import {Supertype, supertypeClass, property, remote, Remoteable, amorphicStatic,  Persistable} from 'amorphic';
+import {Supertype, supertypeClass, property, remote, Remoteable, amorphicStatic,  Persistable} from '@havenlife/amorphic';
 
 
 

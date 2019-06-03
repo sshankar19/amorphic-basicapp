@@ -1,4 +1,4 @@
-import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable, Bindable, Persistable} from 'amorphic';
+import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable, Bindable, Persistable} from '@havenlife/amorphic';
 amorphicStatic['toClientRuleSet'] = ['ticket'];
 amorphicStatic['toServerRuleSet'] = ['ticket']
 
@@ -76,4 +76,3 @@ export class Controller extends Bindable(Remoteable(Persistable(Supertype)))  {
 
 
 }
-

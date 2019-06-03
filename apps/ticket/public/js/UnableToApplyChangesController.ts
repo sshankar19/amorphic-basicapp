@@ -1,4 +1,5 @@
-import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable, Bindable, Persistable} from 'amorphic';
+import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable, Persistable} from '@havenlife/amorphic';
+import { Bindable } from '@havenlife/amorphic';
 import {PersistableCustomer} from "../../../common/js/PersistableCustomer";
 import * as Bluebird from 'bluebird';
 import {PersistableSale, Item} from "../../../common/js/PersistableSale";
@@ -76,6 +77,14 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
     @remote()
     refreshgetPersistorTransient() {
         return PersistableCustomer.getFromPersistWithId(this.customer._id, true);
+    }
+
+    @remote()
+    changeAndSaveOnServer() {
+       return PersistableCustomer.getFromPersistWithId(this.customer._id).then(customer => {
+           this.customer.name = 'changed Customer please have changed';
+           return this.onInitialSave();
+       });
     }
 
     @remote()

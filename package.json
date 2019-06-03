@@ -1,17 +1,17 @@
 {
-  "name": "semotus",
-  "subdomain": "semotus",
+  "name": "amorphic-starter-app",
+  "subdomain": "amorphic starter app",
   "version": "0.0.93",
   "engines": {
     "node": "6.11.x"
   },
   "scripts": {
-    "start": "app.js",
+    "start": "node app.js",
     "compile:ts": "./node_modules/typescript/bin/tsc",
     "build:app": "./node_modules/.bin/gulp webpack"
   },
   "dependencies": {
-    "amorphic": "2.4.2",
+    "@havenlife/amorphic": "4.4.0-beta.1",
     "connect-redis": "3.3.3",
     "crypto": "^1.0.1",
     "es6-promise": "*",

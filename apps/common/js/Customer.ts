@@ -1,4 +1,4 @@
-import {Supertype, supertypeClass, property, remote, Remoteable, amorphicStatic} from 'amorphic';
+import {Supertype, supertypeClass, property, remote, Remoteable, amorphicStatic} from '@havenlife/amorphic';
 
 @supertypeClass({toClient: true, toServer: true})
 export class Customer extends Remoteable(Supertype) {
@@ -13,8 +13,9 @@ export class Customer extends Remoteable(Supertype) {
 
 
 
-    constructor() {
+    constructor(name?: string) {
         super();
+        this.name = name;
     }
 
 }

@@ -28,6 +28,8 @@
     <div class="container" id="container" style="margin-top: 50px">
         <span>Simple Scenario....</span>
         <input type="button" value="Click client-side Event" b:onclick="basicClientServerChangesController.onClickClient()" style="height: 75px; width: 150px" />
+        <input type="button" value="Change name" b:onclick="basicClientServerChangesController.changeName()" style="height: 75px; width: 150px" />
+
     </div>
 
     <br>
@@ -41,10 +43,12 @@
         <input type="button" value="Refresh on Server  legacy call" b:onclick="unableToApplyChangesController.refreshgetPersistor()" style="height: 75px; width: 150px" />
         <input type="button" value="Refresh on Server  legacy call transient true" b:onclick="unableToApplyChangesController.refreshgetPersistorTransient()" style="height: 75px; width: 150px" />
         <input type="button" value="Refresh on Serve with transient on.." b:onclick="unableToApplyChangesController.refreshPersistorFetchTransient()" style="height: 75px; width: 150px" />
+        <input type="button" value="changeAndSaveOnServer" b:onclick="unableToApplyChangesController.changeAndSaveOnServer()" style="height: 75px; width: 150px" />
+
         <input type="button" value="save" b:onclick="unableToApplyChangesController.onInitialSave()" style="height: 75px; width: 150px" />
 
-        <input type="button" value="loadCustomer" b:onclick="unableToApplyChangesController.loadCustomerSaleUsingFetch()" style="height: 75px; width: 150px" />
-        <input type="button" value="loadCustomer" b:onclick="unableToApplyChangesController.getFromPersistWithQuery()" style="height: 75px; width: 150px" />
+        <input type="button" value="loadCustomerSaleUsingFetch" b:onclick="unableToApplyChangesController.loadCustomerSaleUsingFetch()" style="height: 75px; width: 150px" />
+        <input type="button" value="getFromPersistWithQuery" b:onclick="unableToApplyChangesController.getFromPersistWithQuery()" style="height: 75px; width: 150px" />
 
 
     </div>
