@@ -1,11 +1,11 @@
-import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable, Bindable, Persistable} from 'amorphic';
-import {PersistableCustomer} from "../../../common/js/PersistableCustomer";
+import { Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable, Bindable, Persistable } from 'amorphic';
+import { PersistableCustomer } from "../../../common/js/PersistableCustomer";
 import * as Bluebird from 'bluebird';
-import {PersistableSale, Item} from "../../../common/js/PersistableSale";
+import { PersistableSale, Item } from "../../../common/js/PersistableSale";
 import { Controller } from "./controller";
 
-@supertypeClass({toClient: true, toServer: true})
-export class UnableToApplyChangesController extends Bindable(Remoteable(Persistable(Supertype)))  {
+@supertypeClass({ toClient: true, toServer: true })
+export class UnableToApplyChangesController extends Bindable(Remoteable(Persistable(Supertype))) {
 
     constructor(controller: Controller) {
         super();
@@ -21,11 +21,11 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
     @property({ toClient: false })
     txn: any;
 
-    @property({getType: () => Controller})
+    @property({ getType: () => Controller })
     controller: Controller;
 
 
-    serverInit () {
+    serverInit() {
         console.log('serverInit ... UnableToApplyChangesController');
     }
 
@@ -35,7 +35,7 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
         this.customer.name = 'ravi client';
         this.customer.onlyClient = 'client-side initialized';
         let sale = new PersistableSale(20);
-        this.customer.sale  = sale;
+        this.customer.sale = sale;
 
         let book = new Item('book', 10, sale);
         let dvd = new Item('dvd', 15, sale);
@@ -54,13 +54,13 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
     refreshCustomer(forceUpdate) {
         this.txn = this.amorphic.begin();
         return Bluebird.resolve()
-            .then(()=> forceUpdate ? true : this.customer ? this.customer.isStale() : false)
+            .then(() => forceUpdate ? true : this.customer ? this.customer.isStale() : false)
             .then(isStale => isStale ? this.customer.refresh() : null);
     }
 
     @remote()
     refreshPersistorFetch() {
-        return PersistableCustomer.persistorFetchById(this.customer._id, {session: this.amorphic});
+        return PersistableCustomer.persistorFetchById(this.customer._id, { session: this.amorphic });
     }
 
     @remote()
@@ -80,25 +80,25 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
 
     @remote()
     refreshPersistorFetchTransient() {
-        return PersistableCustomer.persistorFetchById(this.customer._id, {session: this.amorphic, transient: true});
+        return PersistableCustomer.persistorFetchById(this.customer._id, { session: this.amorphic, transient: true });
     }
 
     @remote()
     getFromPersistWithQuery() {
-        return PersistableCustomer.getFromPersistWithQuery({name: 'ravi client'});
+        return PersistableCustomer.getFromPersistWithQuery({ name: 'ravi client' });
     }
 
     @remote()
     async loadCustomerSaleUsingFetch() {
-        let customers = await PersistableCustomer.persistorFetchByQuery({name: 'ravi client'}, {session: this.amorphic});
-        this.customer  = customers[0];
+        let customers = await PersistableCustomer.persistorFetchByQuery({ name: 'ravi client' }, { session: this.amorphic });
+        this.customer = customers[0];
         this.controller.customer = this.customer;
         //customers[0].sessionData = this.amorphic.currentSession;
-        
+
         let test = this.amorphic as any;
         customers[0].sessionData = test.currentSession;
-        await this.customer.sale.fetch({items: true});
-        this.directProperty +=1;
+        await this.customer.sale.fetch({ items: true });
+        this.directProperty += 1;
         console.log(this.customer.name);
     }
 
@@ -113,6 +113,13 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
             .finally(() => {
                 this.txn = null;
             });
+    }
+
+    preServerCall(...args) {
+        console.log('utacc');
+        args.forEach(arg => {
+            console.log(JSON.stringify(arg));
+        });
     }
 
 }

@@ -1,20 +1,20 @@
-import {Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable, Bindable, Persistable} from 'amorphic';
+import { Supertype, supertypeClass, property, remote, amorphicStatic, Remoteable, Bindable, Persistable, IAmorphicAppController } from 'amorphic';
 amorphicStatic['toClientRuleSet'] = ['ticket'];
 amorphicStatic['toServerRuleSet'] = ['ticket']
 
 import { BasicClientServerChangesController } from './BasicClientServerChangesController';
 import { UnableToApplyChangesController } from './UnableToApplyChangesController'
-import {PersistableCustomer} from "../../../common/js/PersistableCustomer";
+import { PersistableCustomer } from "../../../common/js/PersistableCustomer";
 
-declare var AmorphicRouter : any;
-declare var ticketRoutes : any;
+declare var AmorphicRouter: any;
+declare var ticketRoutes: any;
 
 @supertypeClass
-export class Controller extends Bindable(Remoteable(Persistable(Supertype)))  {
+export class Controller extends Bindable(Remoteable(Persistable(Supertype))) implements IAmorphicAppController {
 
-     // Global properties
+    // Global properties
 
-    serverInit () {
+    serverInit() {
         if (!this.unableToApplyChangesController) {
             this.unableToApplyChangesController = new UnableToApplyChangesController(this);
         }
@@ -29,29 +29,33 @@ export class Controller extends Bindable(Remoteable(Persistable(Supertype)))  {
     route: any;
 
     @property()
-    basicClientServerChangesController : BasicClientServerChangesController;
+    basicClientServerChangesController: BasicClientServerChangesController;
 
     @property()
-    unableToApplyChangesController : UnableToApplyChangesController;
+    unableToApplyChangesController: UnableToApplyChangesController;
 
     @property()
     customer: PersistableCustomer;
 
     @remote()
-    publicInitAll ()
-    {
+    publicInitAll() {
     };
 
 
     preServerCall(hasChanges: any, _changes: any, _context: any, forceUpdate: any) {
+        console.log('controller');
+        console.log('they');
+        const i = arguments.length;
+        for (let sup = 0; sup < i; sup++) {
+            console.log(JSON.stringify(arguments[sup]));
+            console.log('hey');
+        }
         if (this.unableToApplyChangesController) {
             return this.unableToApplyChangesController.refreshCustomer(forceUpdate);
         }
-
     }
 
-    clientInit ()
-    {
+    clientInit() {
         this.router = AmorphicRouter;
         this.route = AmorphicRouter.route(this, ticketRoutes);
 
@@ -59,21 +63,20 @@ export class Controller extends Bindable(Remoteable(Persistable(Supertype)))  {
             this.basicClientServerChangesController = new BasicClientServerChangesController();
         }
 
-        if (!this.unableToApplyChangesController ) {
+        if (!this.unableToApplyChangesController) {
             this.unableToApplyChangesController = new UnableToApplyChangesController(this);
         }
 
     }
 
 
-    handleRemoteError (error) {
+    handleRemoteError(error) {
         //this.error = this.getErrorMessage(error);
     };
 
-    pageInit (file) {
+    pageInit(file) {
     };
 
 
 
 }
-
