@@ -1,56 +1,113 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://bindster.com" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bindster.com"
+	xmlns:fb="http://ogp.me/ns/fb#"
+	xml:lang="en"
+	lang="en"
+>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Amorphic sample application" />
+		<meta name="keywords" content="amorphic nodejs mongodb" />
+		<meta name="title" content="Amorphic sample application" />
+		<title>Amorphic Ticket Demo</title>
 
-<head>
+		<!--script src="semotus/index.js?ver=0"><--/script-->
+		<script src="js/bundle.js"></script>
+		<script src="amorphic/dist/client.js?ver=0"></script>
+		<script src="modules/amorphic-bindster/index.js?ver=1"></script>
+		<script src="modules/amorphic-bindster/router.js?ver=0"></script>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="description" content="Amorphic sample application">
-    <meta name="keywords" content="amorphic nodejs mongodb">
-    <meta name="title" content="Amorphic sample application">
-    <title> Amorphic Ticket Demo </title>
+		<script src="js/router.js?ver=0"></script>
+		<!-- Dynamically generated script that will contain the controller and related objects -->
+		<script src="amorphic/init/ticket.js?ver=0"></script>
+	</head>
 
-    <!--script src="semotus/index.js?ver=0"><--/script-->
-    <script src="js/bundle.js"></script>
-    <script src="amorphic/client.js?ver=0"></script>
-    <script src="modules/amorphic-bindster/index.js?ver=1"></script>
-    <script src="modules/amorphic-bindster/router.js?ver=0"></script>
+	<body style="visibility:hidden;">
+		<div class="container" id="container" style="margin-top: 50px">
+			<span>Simple Scenario....</span>
+			<input
+				type="button"
+				value="Click client-side Event"
+				b:onclick="basicClientServerChangesController.onClickClient()"
+				style="height: 75px; width: 150px"
+			/>
+			<input
+				type="button"
+				value="return a string"
+				b:onclick="basicClientServerChangesController.returnData()"
+				style="height: 75px; width: 150px"
+			/>
+		</div>
 
+		<br />
 
-    <script src="js/router.js?ver=0"></script>
-    <!-- Dynamically generated script that will contain the controller and related objects -->
-    <script src="amorphic/init/ticket.js?ver=0"></script>
+		<div class="container" id="container" style="margin-top: 50px">
+			<span>Unable to apply changes...</span>
+			<input
+				type="button"
+				value="Create initial Object"
+				b:onclick="unableToApplyChangesController.initialCreate()"
+				style="height: 75px; width: 150px"
+			/>
+			<input
+				type="button"
+				value="Change on client and Save"
+				b:onclick="unableToApplyChangesController.makeChangeAndSave()"
+				style="height: 75px; width: 150px"
+			/>
+			<input
+				type="button"
+				value="Refresh on Server"
+				b:onclick="unableToApplyChangesController.refreshPersistorFetch()"
+				style="height: 75px; width: 150px"
+			/>
+			<input
+				type="button"
+				value="Refresh on Server  No Session"
+				b:onclick="unableToApplyChangesController.refreshPersistorFetchNoSession()"
+				style="height: 75px; width: 150px"
+			/>
+			<input
+				type="button"
+				value="Refresh on Server  legacy call"
+				b:onclick="unableToApplyChangesController.refreshgetPersistor()"
+				style="height: 75px; width: 150px"
+			/>
+			<input
+				type="button"
+				value="Refresh on Server  legacy call transient true"
+				b:onclick="unableToApplyChangesController.refreshgetPersistorTransient()"
+				style="height: 75px; width: 150px"
+			/>
+			<input
+				type="button"
+				value="Refresh on Serve with transient on.."
+				b:onclick="unableToApplyChangesController.refreshPersistorFetchTransient()"
+				style="height: 75px; width: 150px"
+			/>
+			<input
+				type="button"
+				value="save"
+				b:onclick="unableToApplyChangesController.onInitialSave()"
+				style="height: 75px; width: 150px"
+			/>
 
-</head>
+			<input
+				type="button"
+				value="loadCustomer"
+				b:onclick="unableToApplyChangesController.loadCustomerSaleUsingFetch()"
+				style="height: 75px; width: 150px"
+			/>
+			<input
+				type="button"
+				value="loadCustomer"
+				b:onclick="unableToApplyChangesController.getFromPersistWithQuery()"
+				style="height: 75px; width: 150px"
+			/>
+		</div>
 
-<body style="visibility:hidden;">
-
-
-    <div class="container" id="container" style="margin-top: 50px">
-        <span>Simple Scenario....</span>
-        <input type="button" value="Click client-side Event" b:onclick="basicClientServerChangesController.onClickClient()" style="height: 75px; width: 150px" />
-        <input type="button" value="return a string" b:onclick="basicClientServerChangesController.returnData()" style="height: 75px; width: 150px" />
-    </div>
-
-    <br>
-
-    <div class="container" id="container" style="margin-top: 50px">
-        <span>Unable to apply changes...</span>
-        <input type="button" value="Create initial Object" b:onclick="unableToApplyChangesController.initialCreate()" style="height: 75px; width: 150px" />
-        <input type="button" value="Change on client and Save" b:onclick="unableToApplyChangesController.makeChangeAndSave()" style="height: 75px; width: 150px" />
-        <input type="button" value="Refresh on Server" b:onclick="unableToApplyChangesController.refreshPersistorFetch()" style="height: 75px; width: 150px" />
-        <input type="button" value="Refresh on Server  No Session" b:onclick="unableToApplyChangesController.refreshPersistorFetchNoSession()" style="height: 75px; width: 150px" />
-        <input type="button" value="Refresh on Server  legacy call" b:onclick="unableToApplyChangesController.refreshgetPersistor()" style="height: 75px; width: 150px" />
-        <input type="button" value="Refresh on Server  legacy call transient true" b:onclick="unableToApplyChangesController.refreshgetPersistorTransient()" style="height: 75px; width: 150px" />
-        <input type="button" value="Refresh on Serve with transient on.." b:onclick="unableToApplyChangesController.refreshPersistorFetchTransient()" style="height: 75px; width: 150px" />
-        <input type="button" value="save" b:onclick="unableToApplyChangesController.onInitialSave()" style="height: 75px; width: 150px" />
-
-        <input type="button" value="loadCustomer" b:onclick="unableToApplyChangesController.loadCustomerSaleUsingFetch()" style="height: 75px; width: 150px" />
-        <input type="button" value="loadCustomer" b:onclick="unableToApplyChangesController.getFromPersistWithQuery()" style="height: 75px; width: 150px" />
-
-
-    </div>
-
-    <script src="modules/amorphic-bindster/bindster-amorphic.js"></script>
-
-</body>
+		<script src="modules/amorphic-bindster/bindster-amorphic.js"></script>
+	</body>
 </html>
