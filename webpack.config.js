@@ -3,8 +3,8 @@ var nodeExternals = require('webpack-node-externals');
 module.exports = {
 	entry: './apps/ticket/public/js/index.ts',
 	output: {
-		filename: './bundle.js',
-		path: '/'
+		filename: '../../../../dist/apps/ticket/public/js/bundle.js',
+		path: path.resolve(__dirname)
 	},
 	module: {
 		rules: [

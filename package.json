@@ -1,25 +1,25 @@
 {
-	"name": "semotus",
+	"name": "Amorphic-Basic-App",
 	"subdomain": "semotus",
 	"version": "0.0.93",
 	"engines": {
 		"node": "6.11.x"
 	},
 	"scripts": {
+		"compile:watch": "tsc -w &",
+		"build:watch": "gulp webpack:watch &",
 		"start": "node app.js",
-		"compile:ts": "./node_modules/typescript/bin/tsc",
+		"start:dev": "npm run compile:watch && npm run build:watch && nodemon app.js",
+		"compile:ts": "npm run clean && tsc && npm run copyStatics",
+		"clean": "rm -rf ./dist/",
+		"copyStatics": "cp ./apps/ticket/schema.json ./dist/apps/ticket/schema.json && cp ./apps/ticket/public/index.html  ./dist/apps/ticket/public/index.html",
 		"build:app": "./node_modules/.bin/gulp webpack"
 	},
 	"dependencies": {
 		"amorphic": "5.2.0-beta.0",
 		"connect-redis": "3.3.3",
-		"crypto": "^1.0.1",
-		"es6-promise": "*",
 		"null-loader": "*",
-		"pbkdf2": "3.0.13",
 		"pg": "^7.4.2",
-		"q": "^2.0.3",
-		"reflect-metadata": "0.1.12",
 		"source-map-loader": "0.1.6",
 		"underscore": "1.x"
 	},
@@ -34,13 +34,13 @@
 		"chai": "1.x",
 		"gulp": "^3.9.1",
 		"mocha": "1.x",
-		"on-headers": "^1.0.2",
 		"ts-loader": "^2.0.0",
 		"ts-node": "*",
 		"typescript": "3.2.4",
 		"webpack": "^2.2.1",
 		"webpack-node-externals": "^1.5.4",
-		"webpack-stream": "^3.2.0"
+		"webpack-stream": "^3.2.0",
+		"nodemon": "1.19.*"
 	},
 	"bundledDependencies": []
 }

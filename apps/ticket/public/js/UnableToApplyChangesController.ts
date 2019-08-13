@@ -103,16 +103,14 @@ export class UnableToApplyChangesController extends Bindable(Remoteable(Persista
     }
 
     @remote()
-    onInitialSave() {
+    async onInitialSave() {
         if (!this.txn) {
             this.txn = this.amorphic.begin();
         };
 
         this.customer.cascadeSave(this.txn);
-        return this.amorphic.end(this.txn)
-            .finally(() => {
-                this.txn = null;
-            });
+        await this.amorphic.end(this.txn)
+        this.txn = null;
     }
 
     preServerCall(...args) {
