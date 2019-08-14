@@ -1,15 +1,15 @@
 {
 	"name": "Amorphic-Basic-App",
-	"subdomain": "semotus",
-	"version": "0.0.93",
+	"version": "1.0.0",
 	"engines": {
-		"node": "6.11.x"
+		"node": "8.x"
 	},
 	"scripts": {
-		"compile:watch": "tsc -w &",
-		"build:watch": "gulp webpack:watch &",
+		"watch:tsc": "tsc -w &",
+		"watch:wp": "gulp webpack:watch",
 		"start": "node app.js",
-		"start:dev": "npm run compile:watch && npm run build:watch && nodemon app.js",
+		"watch:run": "nodemon app.js",
+		"dev": "concurrently \"npm:watch:*\"",
 		"compile:ts": "npm run clean && tsc && npm run copyStatics",
 		"clean": "rm -rf ./dist/",
 		"copyStatics": "cp ./apps/ticket/schema.json ./dist/apps/ticket/schema.json && cp ./apps/ticket/public/index.html  ./dist/apps/ticket/public/index.html",
@@ -18,29 +18,30 @@
 	"dependencies": {
 		"amorphic": "5.2.0-beta.0",
 		"connect-redis": "3.3.3",
-		"null-loader": "*",
-		"pg": "^7.4.2",
+		"null-loader": "^3.0.0",
+		"pg": "^7.12.1",
 		"source-map-loader": "0.1.6",
-		"underscore": "1.x"
+		"underscore": "^1.9.1"
 	},
 	"devDependencies": {
 		"@types/chai": "^3.4.34",
 		"@types/lodash": "4.14.69",
-		"@types/mocha": "^2.2.39",
+		"@types/mocha": "^2.2.48",
 		"@types/nconf": "0.0.34",
-		"@types/node": "^7.0.5",
-		"@types/q": "*",
-		"@types/underscore": "*",
+		"@types/node": "^7.10.7",
+		"@types/q": "^1.5.2",
+		"@types/underscore": "^1.9.2",
 		"chai": "1.x",
+		"concurrently": "^4.1.1",
 		"gulp": "^3.9.1",
 		"mocha": "1.x",
-		"ts-loader": "^2.0.0",
-		"ts-node": "*",
+		"nodemon": "1.19.*",
+		"ts-loader": "^2.3.7",
+		"ts-node": "^8.3.0",
 		"typescript": "3.2.4",
 		"webpack": "^2.2.1",
-		"webpack-node-externals": "^1.5.4",
-		"webpack-stream": "^3.2.0",
-		"nodemon": "1.19.*"
+		"webpack-node-externals": "^1.7.2",
+		"webpack-stream": "^3.2.0"
 	},
 	"bundledDependencies": []
 }

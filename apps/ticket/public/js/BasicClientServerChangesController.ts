@@ -39,4 +39,9 @@ export class BasicClientServerChangesController extends AbstractController {
 		console.log(this.amorphicToJSON());
 		return await SomeClass.createStuff();
 	}
+
+	@remote({ on: 'server' })
+	async expireSessionStuff() {
+		return await this.amorphic.expireSession();
+	}
 }
